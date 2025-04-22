@@ -1,19 +1,20 @@
-﻿using Pi.Domain.Entities.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pi.Domain.Entities
+namespace Pi.Domain.Entities.Identity
 {
-    public abstract class AuditEntity<T> : IAudit,IEntity<T>
+    public class Roles : IdentityRole<long>, IEntity<long>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public T Id { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public bool IsActive { get; set; }
+        public virtual ICollection<RoleOperations> RoleOperations { get; set; }
+
 
         public string CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }

@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Pi.API.Configurations;
+using Pi.Infrastracture.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +12,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//Add DBContext
+
+//builder.Services.AddDBContextServices(builder);
+
+builder.Services.AddDbContext<PiContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddIdentityServices();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

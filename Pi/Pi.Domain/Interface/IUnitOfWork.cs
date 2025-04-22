@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pi.Domain.Entities.Identity
+namespace Pi.Domain.Interface
 {
-    internal class AppUserRole
+    public interface IUnitOfWork
     {
+        Task Commit();
     }
 }
