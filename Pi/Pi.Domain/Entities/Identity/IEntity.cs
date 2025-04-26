@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pi.Domain.Entities.Identity
 {
-    public interface IEntity<T>
+    public interface IEntity<TKey>
     {
-        T Id { get; set; }
+        TKey Id { get; set; }
         string CreatedBy { get; set; }
         DateTime CreateDate { get; set; }
         DateTime? UpdateDate { get; set; }

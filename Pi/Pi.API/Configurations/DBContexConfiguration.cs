@@ -10,7 +10,7 @@ namespace Pi.API.Configurations
             services.AddDbContext<PiContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
+            },ServiceLifetime.Scoped);
         }
     }
 }

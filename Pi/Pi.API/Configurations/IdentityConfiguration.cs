@@ -6,17 +6,23 @@ namespace Pi.API.Configurations
 {
     public static class IdentityConfiguration
     {
-        public static void AddIdentityServices(this IServiceCollection services)
+        public static IServiceCollection AddIdentityServices(this IServiceCollection services)
         {
-            services.AddIdentity<Users, Roles>(options =>
+            services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-                options.User.RequireUniqueEmail = true;
-            })
-                .AddEntityFrameworkStores<PiContext>()
-                .AddDefaultTokenProviders();
+                options.Password.RequireDigit = false;              // Không yêu cầu số
+                options.Password.RequireUppercase = false;          // Không yêu cầu chữ hoa
+                options.Password.RequireLowercase = false;          // Không yêu cầu chữ thường
+                options.Password.RequireNonAlphanumeric = false;    // Không yêu cầu ký tự đặc biệt
+                options.Password.RequiredLength = 8;                 // Mật khẩu ít nhất 8 ký tự
+                options.User.RequireUniqueEmail = true;              // Yêu cầu email duy nhất
+            });
+            //.AddEntityFrameworkStores<PiContext>()
+            //.AddDefaultTokenProviders();
+
+
+            // có thể thêm policy hoặc role setup nếu cần
+            return services;
         }
     }
 }

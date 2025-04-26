@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pi.Domain.Interface
+namespace Pi.Application.Dtos.UserDto
 {
-    public interface IUnitOfWork
+    internal class RefreshTokenResult
     {
-        Task Commit();
     }
 }

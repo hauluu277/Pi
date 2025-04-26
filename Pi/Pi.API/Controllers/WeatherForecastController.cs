@@ -1,4 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Pi.Application.Interfaces;
+using Pi.Domain.Entities.Identity;
 
 namespace Pi.API.Controllers
 {
@@ -12,13 +14,15 @@ namespace Pi.API.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IUserService _userService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IUserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet("GetWeather")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -28,6 +32,11 @@ namespace Pi.API.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+        [HttpGet("GetUsers")]
+        public List<Users> GetUsers()
+        {
+            return _userService.GetList();
         }
     }
 }

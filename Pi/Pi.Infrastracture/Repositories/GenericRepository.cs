@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Pi.Domain.Interface;
+using Pi.Domain.Interfaces;
 using Pi.Infrastracture.Data;
 using System;
 using System.Collections.Generic;
@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Pi.Infrastracture.Repositories
 {
-    public class GennericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly PiContext _context;
         private readonly DbSet<T> _dbSet;
 
 
-        public GennericRepository(PiContext context)
+        public GenericRepository(PiContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();
@@ -48,7 +48,7 @@ namespace Pi.Infrastracture.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(long id)
+        public async Task<T> GetByIdAsync(object id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -56,7 +56,13 @@ namespace Pi.Infrastracture.Repositories
 
         public void Update(T entity)
         {
-             _dbSet.Update(entity);
+            _dbSet.Update(entity);
         }
+
+        public IQueryable<T> GetQueryable()
+        {
+            return _dbSet.AsQueryable();
+        }
+
     }
 }

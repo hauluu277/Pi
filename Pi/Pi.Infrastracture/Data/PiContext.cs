@@ -13,17 +13,21 @@ using System.Security.Claims;
 
 namespace Pi.Infrastracture.Data
 {
-    public class PiContext : IdentityDbContext<Users, Roles, long>
+    public class PiContext : IdentityDbContext<IdentityUser<long>, IdentityRole<long>, long>
     {
-        private readonly UserManager<IdentityUser<long>> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-
-        public PiContext(DbContextOptions<PiContext> options, UserManager<IdentityUser<long>> userManager, IHttpContextAccessor httpContextAccessor) : base(options)
+        public PiContext(DbContextOptions<PiContext> options) : base(options)
         {
-            _userManager = userManager;
+        }
+
+        public PiContext(DbContextOptions<PiContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
+        {
             _httpContextAccessor = httpContextAccessor;
         }
+
+
+
 
         //DbSet cho cacs entity (Domain entities)
         public DbSet<Modules> Modules { get; set; }
@@ -89,6 +93,14 @@ namespace Pi.Infrastracture.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //Đổi tên các bảng cho các entity Identity
+            modelBuilder.Entity<IdentityUser<long>>().ToTable("Users");
+            modelBuilder.Entity<IdentityRole<long>>().ToTable("Roles");
+            //modelBuilder.Entity<IdentityUserRole<long>>().ToTable("UserRoleAssignments");
+            //modelBuilder.Entity<IdentityUserToken<long>>().ToTable("UserTokens");
+
+
 
             //Cấu hình các quan hệ giữa các bảng
 

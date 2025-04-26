@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pi.Domain", "Pi.Domain\Pi.Domain.csproj", "{C4886D97-75F4-4752-A4A9-A981F3AB0574}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pi.Domain", "Pi.Domain\Pi.Domain.csproj", "{C4886D97-75F4-4752-A4A9-A981F3AB0574}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pi.Application", "Pi.Application\Pi.Application.csproj", "{5704F1AF-C2F6-4264-AD2F-7AE389301190}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pi.Application", "Pi.Application\Pi.Application.csproj", "{5704F1AF-C2F6-4264-AD2F-7AE389301190}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pi.Infrastracture", "Pi.Infrastracture\Pi.Infrastracture.csproj", "{A28F4FB0-E44A-4E8E-BB5D-926216FAA170}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pi.API", "Pi.API\Pi.API.csproj", "{C8F5FAB0-76C2-470F-AED8-F68B6F6718E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pi.API", "Pi.API\Pi.API.csproj", "{C8F5FAB0-76C2-470F-AED8-F68B6F6718E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pi.Infrastracture", "Pi.Infrastracture\Pi.Infrastracture.csproj", "{1C8E744A-DF29-4810-AF55-A6BB0FA68651}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{5704F1AF-C2F6-4264-AD2F-7AE389301190}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5704F1AF-C2F6-4264-AD2F-7AE389301190}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5704F1AF-C2F6-4264-AD2F-7AE389301190}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A28F4FB0-E44A-4E8E-BB5D-926216FAA170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A28F4FB0-E44A-4E8E-BB5D-926216FAA170}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A28F4FB0-E44A-4E8E-BB5D-926216FAA170}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A28F4FB0-E44A-4E8E-BB5D-926216FAA170}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C8F5FAB0-76C2-470F-AED8-F68B6F6718E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C8F5FAB0-76C2-470F-AED8-F68B6F6718E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8F5FAB0-76C2-470F-AED8-F68B6F6718E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8F5FAB0-76C2-470F-AED8-F68B6F6718E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C8E744A-DF29-4810-AF55-A6BB0FA68651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C8E744A-DF29-4810-AF55-A6BB0FA68651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C8E744A-DF29-4810-AF55-A6BB0FA68651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C8E744A-DF29-4810-AF55-A6BB0FA68651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

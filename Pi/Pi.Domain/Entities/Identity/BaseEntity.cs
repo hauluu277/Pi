@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Pi.Domain.Entities.Identity
 {
-    public abstract class BaseEntity<T> : IEntity<T>
+    public abstract class BaseEntity<TKey> : IEntity<TKey>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public T Id { get; set; }
+        public TKey Id { get; set; }
 
         public string CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }

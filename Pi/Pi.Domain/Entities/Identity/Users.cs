@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Pi.Domain.Entities.Identity
@@ -17,6 +18,7 @@ namespace Pi.Domain.Entities.Identity
         public long CreateById { get; set; }
         public long UpdateById { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<RoleOperations> RoleOperations { get; set; }
     }
 }
