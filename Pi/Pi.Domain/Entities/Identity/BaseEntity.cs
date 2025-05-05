@@ -14,12 +14,12 @@ namespace Pi.Domain.Entities.Identity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public TKey Id { get; set; }
 
-        public string CreatedBy { get; set; }
-        public DateTime CreateDate { get; set; }
+        public string CreatedBy { get; set; } = string.Empty;
+        public DateTime CreateDate { get; set; } = DateTime.Now;
         public DateTime? UpdateDate { get; set; }
-        public string UpdatedBy { get; set; }
-        public long CreateById { get; set; }
-        public long UpdateById { get; set; }
+        public string UpdatedBy { get; set; } = string.Empty;
+        public long CreateById { get; set; } = 0;
+        public long UpdateById { get; set; } = 0;
 
 
     }

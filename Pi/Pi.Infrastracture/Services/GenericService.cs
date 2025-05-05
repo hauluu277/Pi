@@ -1,5 +1,6 @@
 ﻿using Pi.Domain.Entities.Identity;
 using Pi.Domain.Interfaces;
+using Pi.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

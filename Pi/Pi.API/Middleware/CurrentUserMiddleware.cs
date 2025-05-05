@@ -1,5 +1,5 @@
 ﻿using Azure.Core;
-using Pi.Domain.Interfaces;
+using Pi.Domain;
 
 namespace Pi.API.Middleware
 {
@@ -24,7 +24,7 @@ namespace Pi.API.Middleware
                     context.Items["User"]=pricipal;
                 }
             }
-            await _next(context);
+             await _next(context);
         }
     }
 }

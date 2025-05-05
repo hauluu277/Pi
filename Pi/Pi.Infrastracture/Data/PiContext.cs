@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace Pi.Infrastracture.Data
 {
-    public class PiContext : IdentityDbContext<IdentityUser<long>, IdentityRole<long>, long>
+    public class PiContext : IdentityDbContext<Users, IdentityRole<long>, long>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -35,6 +35,7 @@ namespace Pi.Infrastracture.Data
         public DbSet<RoleOperations> RoleOperations { get; set; }
         public DbSet<UserOperations> UserOperations { get; set; }
         public DbSet<UserRoleAssignments> UserRoleAssignments { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -51,14 +52,15 @@ namespace Pi.Infrastracture.Data
 
         private void UpdateAuditFields()
         {
-            var entries = ChangeTracker.Entries()
-                .Where(e => e.Entity != null &&
-                    e.Entity.GetType().GetInterfaces().Any(i =>
-                        i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEntity<>)) &&
-                    (e.State == EntityState.Added || e.State == EntityState.Modified));
-
             var userName = GetCurentUserName();
             var userId = GetCurrentUserId();
+
+            var entries = ChangeTracker.Entries()
+            .Where(e => e.Entity != null &&
+                e.Entity.GetType().GetInterfaces().Any(i =>
+                    i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEntity<>)) &&
+                (e.State == EntityState.Added || e.State == EntityState.Modified));
+
             var now = DateTime.Now;
 
             foreach (var entry in entries)
@@ -79,12 +81,20 @@ namespace Pi.Infrastracture.Data
 
         private string GetCurentUserName()
         {
-            return _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "";
+            if (_httpContextAccessor.HttpContext?.User != null && _httpContextAccessor.HttpContext?.User.Identity.IsAuthenticated != true)
+            {
+                return _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "";
+            }
+            return string.Empty;
         }
         private long GetCurrentUserId()
         {
-            var userId = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return long.TryParse(userId, out var id) ? id : 0;
+            if (_httpContextAccessor.HttpContext?.User != null)
+            {
+                var userId = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier);
+                if (userId != null) return long.TryParse(userId.Value, out var id) ? id : 0;
+            }
+            return 0;
 
         }
 
@@ -95,7 +105,7 @@ namespace Pi.Infrastracture.Data
             base.OnModelCreating(modelBuilder);
 
             //Đổi tên các bảng cho các entity Identity
-            modelBuilder.Entity<IdentityUser<long>>().ToTable("Users");
+            modelBuilder.Entity<Users>().ToTable("Users");
             modelBuilder.Entity<IdentityRole<long>>().ToTable("Roles");
             //modelBuilder.Entity<IdentityUserRole<long>>().ToTable("UserRoleAssignments");
             //modelBuilder.Entity<IdentityUserToken<long>>().ToTable("UserTokens");
